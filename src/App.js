@@ -1,11 +1,13 @@
 import React, { useState } from "react";
  import Todo from "./Todoitem";
-
+import Inputarea from "./inputarea";
 
 function App() {
  
   const [item,setItem]=useState('');
   const [addItem,setAdd]=useState([]);
+  function handleChange(e){return setItem(e.target.value)}
+
   function added(){
     setAdd((p)=>{return(
       [...p,item]);
@@ -20,12 +22,11 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <div className="form">            
-        <input value={item} onChange={(e)=>setItem(e.target.value)} type="text" />
-        <button onClick={added}>
-          <span>Add</span>
-        </button>
-      </div>
+      <Inputarea
+        handleChange={handleChange}
+        item={item}
+        added={added}
+      />
       <div>
         <ul>
         {addItem.map((list,index)=>(<Todo 
